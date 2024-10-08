@@ -1,0 +1,237 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      9304,        229]
+NotebookOptionsPosition[      8358,        205]
+NotebookOutlinePosition[      8806,        222]
+CellTagsIndexPosition[      8763,        219]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Smax", " ", "=", " ", "200"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"callPayoff", "[", 
+   RowBox[{"S_", ",", "c_"}], "]"}], ":=", 
+  RowBox[{"Max", "[", 
+   RowBox[{"0", ",", 
+    RowBox[{"S", "-", "c"}]}], "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"putPayoff", "[", 
+   RowBox[{"S_", ",", " ", "p_"}], "]"}], ":=", 
+  RowBox[{"Max", "[", 
+   RowBox[{"0", ",", 
+    RowBox[{"p", "-", "S"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"straddlePayoff", "[", 
+   RowBox[{"S_", ",", "k_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"callPayoff", "[", 
+    RowBox[{"S", ",", "k"}], "]"}], "+", 
+   RowBox[{"putPayoff", "[", 
+    RowBox[{"S", ",", " ", "k"}], "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"straddlePayoff", "[", 
+      RowBox[{"x", ",", "k"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", " ", "0", ",", "100"}], "}"}], ",", " ", 
+     RowBox[{"PlotRange", "->", "All"}]}], "]"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", " ", "0", ",", "100", ",", "1"}], "}"}]}], " ", 
+  "]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.937386313670641*^9, 3.937386323603035*^9}, {
+  3.9373884898524666`*^9, 3.93738851316061*^9}, {3.9373886032584743`*^9, 
+  3.9373886567003727`*^9}},
+ CellLabel->
+  "In[655]:=",ExpressionUUID->"f5aab9b9-5082-7149-abdb-95ef29578ce3"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`k$$ = 48, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`k$$], 0, 100, 1, ControlType -> Manipulator}}, 
+    Typeset`size$$ = {360., {107.88162015645793`, 113.61355358201106`}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`k$$ = 0}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> Plot[
+        $CellContext`straddlePayoff[$CellContext`x, $CellContext`k$$], \
+{$CellContext`x, 0, 100}, PlotRange -> All], 
+      "Specifications" :> {{$CellContext`k$$, 0, 100, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{
+      405.9000000000001, {149.21246000020864`, 154.9443934257618}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.9373885145114784`*^9, {3.937388641909622*^9, 3.9373886573282948`*^9}},
+ CellLabel->
+  "Out[659]=",ExpressionUUID->"93757027-0c2d-0b43-95f6-76b66d16cc5f"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.937388593194313*^9, 
+  3.937388597074047*^9}},ExpressionUUID->"c8de9d63-cb46-134c-b516-\
+e766f326b460"],
+
+Cell[BoxData[
+ RowBox[{"(*", "2", "*)"}]], "Input",
+ CellChangeTimes->{{3.937388474778694*^9, 
+  3.937388483491289*^9}},ExpressionUUID->"7c7f5ce5-f7a3-3d4d-910c-\
+2e22bffa5f0f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"K", "=", "30"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Smax", " ", "=", " ", "200"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"straddlePayoff", "[", 
+   RowBox[{"S_", ",", "c_", ",", "p_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"callPayoff", "[", 
+    RowBox[{"S", ",", "c"}], "]"}], "+", 
+   RowBox[{"putPayoff", "[", 
+    RowBox[{"S", ",", " ", "p"}], "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"Plot", "[", 
+     RowBox[{
+      RowBox[{"straddlePayoff", "[", 
+       RowBox[{"x", ",", " ", "c", ",", " ", "p"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", " ", "0", ",", "100"}], "}"}], ",", " ", 
+      RowBox[{"PlotRange", "->", "All"}]}], "]"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"c", ",", " ", "0", ",", "100", ",", "1"}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"p", ",", " ", "0", ",", "100", ",", "1"}], "}"}]}], "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.937386355920616*^9, 3.9373863788797035`*^9}, {
+  3.9373864095148964`*^9, 3.9373864510344963`*^9}, {3.937386578370537*^9, 
+  3.937386666474781*^9}, {3.937386697200922*^9, 3.9373868002449913`*^9}, {
+  3.9373870894197216`*^9, 3.9373871235863*^9}, {3.9373873592185783`*^9, 
+  3.9373874393212013`*^9}, {3.937387541650276*^9, 3.937387629383894*^9}, {
+  3.937388166478039*^9, 3.9373882191903973`*^9}, {3.9373882673822784`*^9, 
+  3.937388273481745*^9}, {3.9373883601943913`*^9, 3.9373883614445496`*^9}, {
+  3.9373886245003433`*^9, 
+  3.937388634261366*^9}},ExpressionUUID->"4c03646c-c780-6a4d-b05b-\
+6aceb5945728"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`c$$ = 62, $CellContext`p$$ = 30, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`c$$], 0, 100, 1, ControlType -> Manipulator}, {
+      Hold[$CellContext`p$$], 0, 100, 1, ControlType -> Manipulator}}, 
+    Typeset`size$$ = {360., {110.13952059712217`, 115.87145402267531`}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`c$$ = 0, $CellContext`p$$ = 0}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> Plot[
+        $CellContext`straddlePayoff[$CellContext`x, $CellContext`c$$, \
+$CellContext`p$$], {$CellContext`x, 0, 100}, PlotRange -> All], 
+      "Specifications" :> {{$CellContext`c$$, 0, 100, 1}, {$CellContext`p$$, 
+         0, 100, 1}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{
+      405.9000000000001, {161.89036044087288`, 167.62229386642605`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.9373871238943367`*^9, {3.9373873939137497`*^9, 3.937387409500269*^9}, 
+   3.9373874544377346`*^9, {3.9373875479830723`*^9, 3.9373875596265106`*^9}, 
+   3.937387598613508*^9, 3.937387630072489*^9, {3.9373881713632717`*^9, 
+   3.9373882197809772`*^9}, 3.937388274071953*^9, 3.9373883659468346`*^9, 
+   3.9373886262025337`*^9},
+ CellLabel->
+  "Out[644]=",ExpressionUUID->"611cf930-c1ff-cf48-addf-6d06ae0e6a2d"]
+}, Open  ]]
+},
+WindowSize->{1536, 801.5999999999999},
+WindowMargins->{{
+  Automatic, -5.399999999999864}, {-5.399999999999977, Automatic}},
+FrontEndVersion->"14.1 for Microsoft Windows (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"3d5f9cef-7612-0d49-b423-533729807060"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 1412, 39, 123, "Input",ExpressionUUID->"f5aab9b9-5082-7149-abdb-95ef29578ce3"],
+Cell[1991, 63, 1947, 39, 321, "Output",ExpressionUUID->"93757027-0c2d-0b43-95f6-76b66d16cc5f"]
+}, Open  ]],
+Cell[3953, 105, 152, 3, 28, "Input",ExpressionUUID->"c8de9d63-cb46-134c-b516-e766f326b460"],
+Cell[4108, 110, 177, 4, 28, "Input",ExpressionUUID->"7c7f5ce5-f7a3-3d4d-910c-2e22bffa5f0f"],
+Cell[CellGroupData[{
+Cell[4310, 118, 1650, 37, 123, "Input",ExpressionUUID->"4c03646c-c780-6a4d-b05b-6aceb5945728"],
+Cell[5963, 157, 2379, 45, 365, "Output",ExpressionUUID->"611cf930-c1ff-cf48-addf-6d06ae0e6a2d"]
+}, Open  ]]
+}
+]
+*)
+
