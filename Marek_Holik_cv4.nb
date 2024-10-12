@@ -10,83 +10,137 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[      9304,        229]
-NotebookOptionsPosition[      8358,        205]
-NotebookOutlinePosition[      8806,        222]
-CellTagsIndexPosition[      8763,        219]
+NotebookDataLength[     25427,        596]
+NotebookOptionsPosition[     23937,        563]
+NotebookOutlinePosition[     24377,        580]
+CellTagsIndexPosition[     24334,        577]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
 
 Cell[CellGroupData[{
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"Smax", " ", "=", " ", "200"}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"callPayoff", "[", 
-   RowBox[{"S_", ",", "c_"}], "]"}], ":=", 
-  RowBox[{"Max", "[", 
-   RowBox[{"0", ",", 
-    RowBox[{"S", "-", "c"}]}], "]"}]}], "\n", 
- RowBox[{
-  RowBox[{"putPayoff", "[", 
-   RowBox[{"S_", ",", " ", "p_"}], "]"}], ":=", 
-  RowBox[{"Max", "[", 
-   RowBox[{"0", ",", 
-    RowBox[{"p", "-", "S"}]}], "]"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"straddlePayoff", "[", 
-   RowBox[{"S_", ",", "k_"}], "]"}], ":=", 
+Cell[BoxData[
+ RowBox[{" ", 
+  RowBox[{"(*", 
+   RowBox[{"1.", "BOUGHT", " ", "STRADDLE"}], "*)"}], "\[IndentingNewLine]", 
   RowBox[{
-   RowBox[{"callPayoff", "[", 
-    RowBox[{"S", ",", "k"}], "]"}], "+", 
-   RowBox[{"putPayoff", "[", 
-    RowBox[{"S", ",", " ", "k"}], "]"}]}]}], "\[IndentingNewLine]", 
- RowBox[{"Manipulate", "[", 
-  RowBox[{
-   RowBox[{"Plot", "[", 
+   RowBox[{
+    RowBox[{"e", "=", "100"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
     RowBox[{
-     RowBox[{"straddlePayoff", "[", 
-      RowBox[{"x", ",", "k"}], "]"}], ",", 
+     RowBox[{"PayoffCall", "[", 
+      RowBox[{"S_", ",", "E_"}], "]"}], ":=", 
+     RowBox[{"Max", "[", 
+      RowBox[{
+       RowBox[{"S", "-", "E"}], ",", "0"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"PayoffPut", "[", 
+      RowBox[{"S_", ",", "E_"}], "]"}], ":=", 
+     RowBox[{"Max", "[", 
+      RowBox[{
+       RowBox[{"E", "-", "S"}], ",", "0"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"PayoffStraddle", "[", 
+      RowBox[{"S_", ",", "E_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"PayoffCall", "[", 
+       RowBox[{"S", ",", "E"}], "]"}], "+", 
+      RowBox[{"PayoffPut", "[", 
+       RowBox[{"S", ",", "E"}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Manipulate", "[", 
+    RowBox[{
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", "payoffStraddle", "}"}], ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"payoffStraddle", "[", 
+          RowBox[{"S_", ",", "E_"}], "]"}], ":=", 
+         RowBox[{
+          RowBox[{"Max", "[", 
+           RowBox[{
+            RowBox[{"S", "-", "E"}], ",", "0"}], "]"}], "+", 
+          RowBox[{"Max", "[", 
+           RowBox[{
+            RowBox[{"E", "-", "S"}], ",", "0"}], "]"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Plot", "[", 
+         RowBox[{
+          RowBox[{"payoffStraddle", "[", 
+           RowBox[{"S", ",", "E"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"S", ",", "0", ",", 
+            RowBox[{"2", "*", "E"}]}], "}"}], ",", 
+          RowBox[{"AxesLabel", "->", 
+           RowBox[{"{", 
+            RowBox[{"\"\<S_T\>\"", ",", "\"\<Payoff\>\""}], "}"}]}], ",", 
+          RowBox[{"PlotLabel", "->", 
+           RowBox[{
+           "\"\<Payoff diagram for Bought Straddle (Strike Price = \>\"", "<>", 
+            RowBox[{"ToString", "[", "E", "]"}], "<>", "\"\<)\>\""}]}], ",", 
+          RowBox[{"PlotRange", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", 
+               RowBox[{"2", "*", "E"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "E"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"GridLines", "->", "Automatic"}], ",", 
+          RowBox[{"Exclusions", "->", "None"}]}], "]"}]}]}], "]"}], ",", 
+     "\[IndentingNewLine]", 
      RowBox[{"{", 
-      RowBox[{"x", ",", " ", "0", ",", "100"}], "}"}], ",", " ", 
-     RowBox[{"PlotRange", "->", "All"}]}], "]"}], ",", " ", 
-   RowBox[{"{", 
-    RowBox[{"k", ",", " ", "0", ",", "100", ",", "1"}], "}"}]}], " ", 
-  "]"}], "\[IndentingNewLine]"}], "Input",
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"E", ",", "100", ",", "\"\<Strike Price (E)\>\""}], "}"}], 
+       ",", "50", ",", "200", ",", "1"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"ControlPlacement", "->", "Top"}]}], "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
  CellChangeTimes->{{3.937386313670641*^9, 3.937386323603035*^9}, {
-  3.9373884898524666`*^9, 3.93738851316061*^9}, {3.9373886032584743`*^9, 
-  3.9373886567003727`*^9}},
- CellLabel->
-  "In[655]:=",ExpressionUUID->"f5aab9b9-5082-7149-abdb-95ef29578ce3"],
+   3.9373884898524666`*^9, 3.93738851316061*^9}, {3.9373886032584743`*^9, 
+   3.9373886567003736`*^9}, {3.9377165738195133`*^9, 3.937716581441263*^9}, {
+   3.937716702556072*^9, 3.937716717868349*^9}, {3.937716775990904*^9, 
+   3.937716815797533*^9}, 3.937716855280905*^9, 3.937718107936474*^9, 
+   3.937718579016756*^9, {3.9377188067834854`*^9, 3.937718833290327*^9}, {
+   3.93771891916885*^9, 3.9377189193924904`*^9}, {3.937719041651848*^9, 
+   3.937719076453211*^9}, {3.937719139878481*^9, 3.9377191413010635`*^9}},
+ CellLabel->"In[75]:=",ExpressionUUID->"f5aab9b9-5082-7149-abdb-95ef29578ce3"],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`k$$ = 48, Typeset`show$$ = True, 
+   DynamicModuleBox[{E$$ = 96, Typeset`show$$ = True, 
     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
-    "\"untitled\"", Typeset`specs$$ = {{
-      Hold[$CellContext`k$$], 0, 100, 1, ControlType -> Manipulator}}, 
-    Typeset`size$$ = {360., {107.88162015645793`, 113.61355358201106`}}, 
-    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
-    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[E$$], 100, "Strike Price (E)"}, 50, 200, 1, ControlType -> 
+      Manipulator}}, Typeset`size$$ = {360., {119., 123.37029162580126`}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
     DynamicBox[Manipulate`ManipulateBoxes[
-     1, StandardForm, "Variables" :> {$CellContext`k$$ = 0}, 
-      "ControllerVariables" :> {}, 
-      "OtherVariables" :> {
+     1, StandardForm, "Variables" :> {E$$ = 100}, "ControllerVariables" :> {},
+       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
         Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
-         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
-        Typeset`keyframeList$$}, "Body" :> Plot[
-        $CellContext`straddlePayoff[$CellContext`x, $CellContext`k$$], \
-{$CellContext`x, 0, 100}, PlotRange -> All], 
-      "Specifications" :> {{$CellContext`k$$, 0, 100, 1}}, "Options" :> {}, 
-      "DefaultOptions" :> {}],
-     ImageSizeCache->{
-      405.9000000000001, {149.21246000020864`, 154.9443934257618}},
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`payoffStraddle$}, $CellContext`payoffStraddle$[
+           Pattern[$CellContext`S, 
+            Blank[]], 
+           Pattern[E, 
+            Blank[]]] := 
+         Max[$CellContext`S - E, 0] + Max[E - $CellContext`S, 0]; Plot[
+          $CellContext`payoffStraddle$[$CellContext`S, E$$], {$CellContext`S, 
+           0, 2 E$$}, AxesLabel -> {"S_T", "Payoff"}, PlotLabel -> 
+          "Payoff diagram for Bought Straddle (Strike Price = " <> 
+           ToString[E$$] <> ")", PlotRange -> {{0, 2 E$$}, {0, E$$}}, 
+          GridLines -> Automatic, Exclusions -> None]], 
+      "Specifications" :> {{{E$$, 100, "Strike Price (E)"}, 50, 200, 1}}, 
+      "Options" :> {ControlPlacement -> Top}, "DefaultOptions" :> {}],
+     ImageSizeCache->{407., {162.13403328722342`, 167.86596671277658`}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -98,91 +152,266 @@ Cell[BoxData[
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
  CellChangeTimes->{
-  3.9373885145114784`*^9, {3.937388641909622*^9, 3.9373886573282948`*^9}},
- CellLabel->
-  "Out[659]=",ExpressionUUID->"93757027-0c2d-0b43-95f6-76b66d16cc5f"]
+  3.9373885145114784`*^9, {3.937388641909622*^9, 3.9373886573282948`*^9}, 
+   3.937716484008093*^9, {3.9377167888256264`*^9, 3.937716816406168*^9}, 
+   3.9377168564054375`*^9, 3.9377181114225426`*^9, 3.9377189258700066`*^9, {
+   3.9377190618050137`*^9, 3.937719077210823*^9}, 3.9377192135969353`*^9},
+ CellLabel->"Out[79]=",ExpressionUUID->"5e8b25db-7f28-2747-854c-d1afa2b499a9"]
 }, Open  ]],
 
-Cell[BoxData[""], "Input",
- CellChangeTimes->{{3.937388593194313*^9, 
-  3.937388597074047*^9}},ExpressionUUID->"c8de9d63-cb46-134c-b516-\
-e766f326b460"],
-
 Cell[BoxData[
- RowBox[{"(*", "2", "*)"}]], "Input",
- CellChangeTimes->{{3.937388474778694*^9, 
-  3.937388483491289*^9}},ExpressionUUID->"7c7f5ce5-f7a3-3d4d-910c-\
-2e22bffa5f0f"],
+ RowBox[{"(*", 
+  RowBox[{"2.", "BOUGHT", " ", "STRANGLE"}], "*)"}]], "Input",
+ CellChangeTimes->{{3.937718542545988*^9, 3.9377185444067173`*^9}, {
+  3.9377188105180264`*^9, 
+  3.9377188254543953`*^9}},ExpressionUUID->"6307eb56-c33c-3f4f-b1a1-\
+13afb6f0ef10"],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"K", "=", "30"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Smax", " ", "=", " ", "200"}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"straddlePayoff", "[", 
-   RowBox[{"S_", ",", "c_", ",", "p_"}], "]"}], ":=", 
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
   RowBox[{
-   RowBox[{"callPayoff", "[", 
-    RowBox[{"S", ",", "c"}], "]"}], "+", 
-   RowBox[{"putPayoff", "[", 
-    RowBox[{"S", ",", " ", "p"}], "]"}]}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Manipulate", "[", 
-   RowBox[{
-    RowBox[{"Plot", "[", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "payoffStrangle", "}"}], ",", "\[IndentingNewLine]", 
      RowBox[{
-      RowBox[{"straddlePayoff", "[", 
-       RowBox[{"x", ",", " ", "c", ",", " ", "p"}], "]"}], ",", 
-      RowBox[{"{", 
-       RowBox[{"x", ",", " ", "0", ",", "100"}], "}"}], ",", " ", 
-      RowBox[{"PlotRange", "->", "All"}]}], "]"}], ",", " ", 
-    RowBox[{"{", 
-     RowBox[{"c", ",", " ", "0", ",", "100", ",", "1"}], "}"}], ",", " ", 
-    RowBox[{"{", 
-     RowBox[{"p", ",", " ", "0", ",", "100", ",", "1"}], "}"}]}], "]"}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
- CellChangeTimes->{{3.937386355920616*^9, 3.9373863788797035`*^9}, {
-  3.9373864095148964`*^9, 3.9373864510344963`*^9}, {3.937386578370537*^9, 
-  3.937386666474781*^9}, {3.937386697200922*^9, 3.9373868002449913`*^9}, {
-  3.9373870894197216`*^9, 3.9373871235863*^9}, {3.9373873592185783`*^9, 
-  3.9373874393212013`*^9}, {3.937387541650276*^9, 3.937387629383894*^9}, {
-  3.937388166478039*^9, 3.9373882191903973`*^9}, {3.9373882673822784`*^9, 
-  3.937388273481745*^9}, {3.9373883601943913`*^9, 3.9373883614445496`*^9}, {
-  3.9373886245003433`*^9, 
-  3.937388634261366*^9}},ExpressionUUID->"4c03646c-c780-6a4d-b05b-\
-6aceb5945728"],
+      RowBox[{
+       RowBox[{"payoffStrangle", "[", 
+        RowBox[{"S_", ",", "E1_", ",", "E2_"}], "]"}], ":=", 
+       RowBox[{
+        RowBox[{"Max", "[", 
+         RowBox[{
+          RowBox[{"S", "-", "E2"}], ",", "0"}], "]"}], "+", 
+        RowBox[{"Max", "[", 
+         RowBox[{
+          RowBox[{"E1", "-", "S"}], ",", "0"}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{"payoffStrangle", "[", 
+         RowBox[{"S", ",", "E1", ",", "E2"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"S", ",", "0", ",", 
+          RowBox[{"2", "*", "E2"}]}], "}"}], ",", 
+        RowBox[{"AxesLabel", "->", 
+         RowBox[{"{", 
+          RowBox[{"\"\<S_T\>\"", ",", "\"\<Payoff\>\""}], "}"}]}], ",", 
+        RowBox[{"PlotLabel", "->", 
+         RowBox[{"\"\<Payoff diagram for Bought Strangle (E1 = \>\"", "<>", 
+          RowBox[{"ToString", "[", "E1", "]"}], "<>", "\"\<, E2 = \>\"", "<>", 
+          RowBox[{"ToString", "[", "E2", "]"}], "<>", "\"\<)\>\""}]}], ",", 
+        RowBox[{"PlotRange", "->", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"0", ",", 
+             RowBox[{"2", "*", "E2"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", 
+             RowBox[{"Max", "[", 
+              RowBox[{
+               RowBox[{"E2", "-", "E1"}], ",", "E2"}], "]"}]}], "}"}]}], 
+          "}"}]}], ",", 
+        RowBox[{"GridLines", "->", "Automatic"}], ",", 
+        RowBox[{"Exclusions", "->", "None"}]}], "]"}]}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"E1", ",", "80", ",", "\"\<Strike Price (E1)\>\""}], "}"}], ",",
+      "50", ",", "150", ",", "1"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"E2", ",", "120", ",", "\"\<Strike Price (E2)\>\""}], "}"}], 
+     ",", 
+     RowBox[{"E1", "+", "10"}], ",", "200", ",", "1"}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"ControlPlacement", "->", "Top"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.937718202177986*^9, 3.9377182021789837`*^9}, {
+   3.937718234841337*^9, 3.937718246741209*^9}, 3.9377185923013935`*^9, {
+   3.937718912529686*^9, 3.93771891521587*^9}, {3.9377191486126366`*^9, 
+   3.937719151797964*^9}},
+ CellLabel->"In[74]:=",ExpressionUUID->"12e72645-cc16-754b-bcc0-ae34ac7ee440"],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`c$$ = 62, $CellContext`p$$ = 30, 
+   DynamicModuleBox[{$CellContext`E1$$ = 80, $CellContext`E2$$ = 134, 
     Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
-    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
-      Hold[$CellContext`c$$], 0, 100, 1, ControlType -> Manipulator}, {
-      Hold[$CellContext`p$$], 0, 100, 1, ControlType -> Manipulator}}, 
-    Typeset`size$$ = {360., {110.13952059712217`, 115.87145402267531`}}, 
-    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
-    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`E1$$], 80, "Strike Price (E1)"}, 50, 150, 1, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`E2$$], 120, "Strike Price (E2)"}, 
+      Dynamic[$CellContext`E1$$ + 10], 200, 1, ControlType -> Manipulator}}, 
+    Typeset`size$$ = {360., {117., 122.07219940188159`}}, Typeset`update$$ = 
+    0, Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
-      "Variables" :> {$CellContext`c$$ = 0, $CellContext`p$$ = 0}, 
+      "Variables" :> {$CellContext`E1$$ = 80, $CellContext`E2$$ = 120}, 
       "ControllerVariables" :> {}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
         Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
-         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
-        Typeset`keyframeList$$}, "Body" :> Plot[
-        $CellContext`straddlePayoff[$CellContext`x, $CellContext`c$$, \
-$CellContext`p$$], {$CellContext`x, 0, 100}, PlotRange -> All], 
-      "Specifications" :> {{$CellContext`c$$, 0, 100, 1}, {$CellContext`p$$, 
-         0, 100, 1}}, "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{
-      405.9000000000001, {161.89036044087288`, 167.62229386642605`}},
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`payoffStrangle$}, $CellContext`payoffStrangle$[
+           Pattern[$CellContext`S, 
+            Blank[]], 
+           Pattern[$CellContext`E1, 
+            Blank[]], 
+           Pattern[$CellContext`E2, 
+            Blank[]]] := 
+         Max[$CellContext`S - $CellContext`E2, 0] + 
+          Max[$CellContext`E1 - $CellContext`S, 0]; Plot[
+          $CellContext`payoffStrangle$[$CellContext`S, $CellContext`E1$$, \
+$CellContext`E2$$], {$CellContext`S, 0, 2 $CellContext`E2$$}, 
+          AxesLabel -> {"S_T", "Payoff"}, PlotLabel -> 
+          "Payoff diagram for Bought Strangle (E1 = " <> 
+           ToString[$CellContext`E1$$] <> ", E2 = " <> 
+           ToString[$CellContext`E2$$] <> ")", 
+          PlotRange -> {{0, 2 $CellContext`E2$$}, {0, 
+             Max[$CellContext`E2$$ - $CellContext`E1$$, $CellContext`E2$$]}}, 
+          GridLines -> Automatic, Exclusions -> None]], 
+      "Specifications" :> {{{$CellContext`E1$$, 80, "Strike Price (E1)"}, 50, 
+         150, 1}, {{$CellContext`E2$$, 120, "Strike Price (E2)"}, 
+         Dynamic[$CellContext`E1$$ + 10], 200, 1}}, 
+      "Options" :> {ControlPlacement -> Top}, "DefaultOptions" :> {}],
+     ImageSizeCache->{407., {171.63403328722342`, 177.36596671277658`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.93771820330126*^9, 3.9377192118917046`*^9},
+ CellLabel->"Out[74]=",ExpressionUUID->"a247a5b3-97a0-0b4f-90be-804e08e7b3ec"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"3.", "BULLISH", " ", "SPREAD"}], "*)"}]], "Input",
+ CellChangeTimes->{{3.9377188369627666`*^9, 
+  3.9377188463186893`*^9}},ExpressionUUID->"00337cc4-2741-c84d-a882-\
+3d1e07a2e030"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "payoffBullishSpread", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"payoffBullishSpread", "[", 
+        RowBox[{"S_", ",", "E1_", ",", "E2_"}], "]"}], ":=", 
+       RowBox[{
+        RowBox[{"Max", "[", 
+         RowBox[{
+          RowBox[{"S", "-", "E2"}], ",", "0"}], "]"}], "-", 
+        RowBox[{"Max", "[", 
+         RowBox[{
+          RowBox[{"S", "-", "E1"}], ",", "0"}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{"payoffBullishSpread", "[", 
+         RowBox[{"S", ",", "E1", ",", "E2"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"S", ",", "0", ",", 
+          RowBox[{"2", "*", "E2"}]}], "}"}], ",", 
+        RowBox[{"AxesLabel", "->", 
+         RowBox[{"{", 
+          RowBox[{"\"\<S_T\>\"", ",", "\"\<Payoff\>\""}], "}"}]}], ",", 
+        RowBox[{"PlotLabel", "->", 
+         RowBox[{"\"\<Payoff diagram for Bullish Spread (E1 = \>\"", "<>", 
+          RowBox[{"ToString", "[", "E1", "]"}], "<>", "\"\<, E2 = \>\"", "<>", 
+          RowBox[{"ToString", "[", "E2", "]"}], "<>", "\"\<)\>\""}]}], ",", 
+        RowBox[{"PlotRange", "->", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"0", ",", 
+             RowBox[{"2", "*", "E2"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "E1"}], ",", 
+             RowBox[{"-", "E1"}]}], "}"}]}], "}"}]}], ",", 
+        RowBox[{"GridLines", "->", "Automatic"}], ",", 
+        RowBox[{"Exclusions", "->", "None"}]}], "]"}]}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"E1", ",", "80", ",", "\"\<Strike Price (E1)\>\""}], "}"}], ",",
+      "50", ",", "150", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"E2", ",", "120", ",", "\"\<Strike Price (E2)\>\""}], "}"}], 
+     ",", 
+     RowBox[{"E1", "+", "10"}], ",", "200", ",", "1"}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"ControlPlacement", "->", "Top"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.937718286687769*^9, 3.937718286689764*^9}, {
+  3.937718670928919*^9, 3.9377187752959595`*^9}, {3.937718905832527*^9, 
+  3.9377189085825253`*^9}, {3.937719091517515*^9, 3.937719110244545*^9}},
+ CellLabel->"In[72]:=",ExpressionUUID->"569bffc5-d42c-b544-9b1e-72908e49c9f3"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`E1$$ = 78, $CellContext`E2$$ = 158, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`E1$$], 80, "Strike Price (E1)"}, 50, 150, 1, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`E2$$], 120, "Strike Price (E2)"}, 
+      Dynamic[$CellContext`E1$$ + 10], 200, 1, ControlType -> Manipulator}}, 
+    Typeset`size$$ = {360., {109., 112.7911027111542}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`E1$$ = 80, $CellContext`E2$$ = 120}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`payoffBullishSpread$}, \
+$CellContext`payoffBullishSpread$[
+           Pattern[$CellContext`S, 
+            Blank[]], 
+           Pattern[$CellContext`E1, 
+            Blank[]], 
+           Pattern[$CellContext`E2, 
+            Blank[]]] := 
+         Max[$CellContext`S - $CellContext`E2, 0] - 
+          Max[$CellContext`S - $CellContext`E1, 0]; Plot[
+          $CellContext`payoffBullishSpread$[$CellContext`S, \
+$CellContext`E1$$, $CellContext`E2$$], {$CellContext`S, 0, 
+           2 $CellContext`E2$$}, AxesLabel -> {"S_T", "Payoff"}, PlotLabel -> 
+          "Payoff diagram for Bullish Spread (E1 = " <> 
+           ToString[$CellContext`E1$$] <> ", E2 = " <> 
+           ToString[$CellContext`E2$$] <> ")", 
+          PlotRange -> {{
+            0, 2 $CellContext`E2$$}, {-$CellContext`E1$$, \
+-$CellContext`E1$$}}, GridLines -> Automatic, Exclusions -> None]], 
+      "Specifications" :> {{{$CellContext`E1$$, 80, "Strike Price (E1)"}, 50, 
+         150, 1}, {{$CellContext`E2$$, 120, "Strike Price (E2)"}, 
+         Dynamic[$CellContext`E1$$ + 10], 200, 1}}, 
+      "Options" :> {ControlPlacement -> Top}, "DefaultOptions" :> {}],
+     ImageSizeCache->{407., {162.63403328722342`, 168.36596671277658`}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -194,19 +423,148 @@ $CellContext`p$$], {$CellContext`x, 0, 100}, PlotRange -> All],
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
  CellChangeTimes->{
-  3.9373871238943367`*^9, {3.9373873939137497`*^9, 3.937387409500269*^9}, 
-   3.9373874544377346`*^9, {3.9373875479830723`*^9, 3.9373875596265106`*^9}, 
-   3.937387598613508*^9, 3.937387630072489*^9, {3.9373881713632717`*^9, 
-   3.9373882197809772`*^9}, 3.937388274071953*^9, 3.9373883659468346`*^9, 
-   3.9373886262025337`*^9},
- CellLabel->
-  "Out[644]=",ExpressionUUID->"611cf930-c1ff-cf48-addf-6d06ae0e6a2d"]
+  3.9377182871899986`*^9, {3.9377186720719376`*^9, 3.9377187756013927`*^9}, 
+   3.9377192001388664`*^9},
+ CellLabel->"Out[72]=",ExpressionUUID->"d961e6a7-74ed-f34a-82ae-751dab4d71cf"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"4.", "BEARISH", " ", "SPREAD"}], "*)"}]], "Input",
+ CellChangeTimes->{{3.937718850842388*^9, 
+  3.9377188611348476`*^9}},ExpressionUUID->"ee167a03-4e29-7c49-99ef-\
+1d8910f9605e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "payoffBearishSpread", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"payoffBearishSpread", "[", 
+         RowBox[{"S_", ",", "E1_", ",", "E2_"}], "]"}], ":=", 
+        RowBox[{
+         RowBox[{"Max", "[", 
+          RowBox[{
+           RowBox[{"S", "-", "E1"}], ",", "0"}], "]"}], "-", 
+         RowBox[{"Max", "[", 
+          RowBox[{
+           RowBox[{"S", "-", "E2"}], ",", "0"}], "]"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Plot", "[", 
+        RowBox[{
+         RowBox[{"payoffBearishSpread", "[", 
+          RowBox[{"S", ",", "E1", ",", "E2"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"S", ",", "0", ",", 
+           RowBox[{"2", "*", "E2"}]}], "}"}], ",", 
+         RowBox[{"AxesLabel", "->", 
+          RowBox[{"{", 
+           RowBox[{"\"\<S_T\>\"", ",", "\"\<Payoff\>\""}], "}"}]}], ",", 
+         RowBox[{"PlotLabel", "->", 
+          RowBox[{"\"\<Payoff diagram for Bearish Spread (E1 = \>\"", "<>", 
+           RowBox[{"ToString", "[", "E1", "]"}], "<>", "\"\<, E2 = \>\"", "<>", 
+           RowBox[{"ToString", "[", "E2", "]"}], "<>", "\"\<)\>\""}]}], ",", 
+         RowBox[{"PlotRange", "->", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", 
+              RowBox[{"2", "*", "E2"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"E1", ",", "E1"}], "}"}]}], "}"}]}], ",", 
+         RowBox[{"GridLines", "->", "Automatic"}], ",", 
+         RowBox[{"Exclusions", "->", "None"}]}], "]"}]}]}], "]"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"E1", ",", "80", ",", "\"\<Strike Price (E1)\>\""}], "}"}], 
+      ",", "50", ",", "150", ",", "1"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"E2", ",", "120", ",", "\"\<Strike Price (E2)\>\""}], "}"}], 
+      ",", 
+      RowBox[{"E1", "+", "10"}], ",", "200", ",", "1"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"ControlPlacement", "->", "Top"}]}], "]"}], "\n"}]], "Input",
+ CellChangeTimes->{{3.937718373072876*^9, 3.9377183730738697`*^9}, {
+  3.937718872681431*^9, 3.9377188954813595`*^9}, {3.937719114493601*^9, 
+  3.9377191334686165`*^9}},
+ CellLabel->"In[73]:=",ExpressionUUID->"2326e976-f637-3e4a-a4e7-e0d39cd16316"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`E1$$ = 79, $CellContext`E2$$ = 196, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`E1$$], 80, "Strike Price (E1)"}, 50, 150, 1, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`E2$$], 120, "Strike Price (E2)"}, 
+      Dynamic[$CellContext`E1$$ + 10], 200, 1, ControlType -> Manipulator}}, 
+    Typeset`size$$ = {360., {117., 122.07219940188156`}}, Typeset`update$$ = 
+    0, Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`E1$$ = 80, $CellContext`E2$$ = 120}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`payoffBearishSpread$}, \
+$CellContext`payoffBearishSpread$[
+           Pattern[$CellContext`S, 
+            Blank[]], 
+           Pattern[$CellContext`E1, 
+            Blank[]], 
+           Pattern[$CellContext`E2, 
+            Blank[]]] := 
+         Max[$CellContext`S - $CellContext`E1, 0] - 
+          Max[$CellContext`S - $CellContext`E2, 0]; Plot[
+          $CellContext`payoffBearishSpread$[$CellContext`S, \
+$CellContext`E1$$, $CellContext`E2$$], {$CellContext`S, 0, 
+           2 $CellContext`E2$$}, AxesLabel -> {"S_T", "Payoff"}, PlotLabel -> 
+          "Payoff diagram for Bearish Spread (E1 = " <> 
+           ToString[$CellContext`E1$$] <> ", E2 = " <> 
+           ToString[$CellContext`E2$$] <> ")", 
+          PlotRange -> {{
+            0, 2 $CellContext`E2$$}, {$CellContext`E1$$, $CellContext`E1$$}}, 
+          GridLines -> Automatic, Exclusions -> None]], 
+      "Specifications" :> {{{$CellContext`E1$$, 80, "Strike Price (E1)"}, 50, 
+         150, 1}, {{$CellContext`E2$$, 120, "Strike Price (E2)"}, 
+         Dynamic[$CellContext`E1$$ + 10], 200, 1}}, 
+      "Options" :> {ControlPlacement -> Top}, "DefaultOptions" :> {}],
+     ImageSizeCache->{407., {171.63403328722342`, 177.36596671277658`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.937718373821232*^9, {3.9377188737585144`*^9, 3.937718896068943*^9}, 
+   3.937719205483515*^9},
+ CellLabel->"Out[73]=",ExpressionUUID->"1e9840be-f851-004e-a1ba-7b06948a1a2c"]
 }, Open  ]]
 },
-WindowSize->{1536, 801.5999999999999},
+WindowSize->{1152, 615.6},
 WindowMargins->{{
   Automatic, -5.399999999999864}, {-5.399999999999977, Automatic}},
-FrontEndVersion->"14.1 for Microsoft Windows (64-bit) (July 16, 2024)",
+FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (December 12, 2023)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"3d5f9cef-7612-0d49-b423-533729807060"
 ]
@@ -222,14 +580,23 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[576, 22, 1412, 39, 123, "Input",ExpressionUUID->"f5aab9b9-5082-7149-abdb-95ef29578ce3"],
-Cell[1991, 63, 1947, 39, 321, "Output",ExpressionUUID->"93757027-0c2d-0b43-95f6-76b66d16cc5f"]
+Cell[576, 22, 3539, 88, 238, "Input",ExpressionUUID->"f5aab9b9-5082-7149-abdb-95ef29578ce3"],
+Cell[4118, 112, 2504, 46, 349, "Output",ExpressionUUID->"5e8b25db-7f28-2747-854c-d1afa2b499a9"]
 }, Open  ]],
-Cell[3953, 105, 152, 3, 28, "Input",ExpressionUUID->"c8de9d63-cb46-134c-b516-e766f326b460"],
-Cell[4108, 110, 177, 4, 28, "Input",ExpressionUUID->"7c7f5ce5-f7a3-3d4d-910c-2e22bffa5f0f"],
+Cell[6637, 161, 273, 6, 28, "Input",ExpressionUUID->"6307eb56-c33c-3f4f-b1a1-13afb6f0ef10"],
 Cell[CellGroupData[{
-Cell[4310, 118, 1650, 37, 123, "Input",ExpressionUUID->"4c03646c-c780-6a4d-b05b-6aceb5945728"],
-Cell[5963, 157, 2379, 45, 365, "Output",ExpressionUUID->"611cf930-c1ff-cf48-addf-6d06ae0e6a2d"]
+Cell[6935, 171, 2591, 64, 162, "Input",ExpressionUUID->"12e72645-cc16-754b-bcc0-ae34ac7ee440"],
+Cell[9529, 237, 2939, 56, 368, "Output",ExpressionUUID->"a247a5b3-97a0-0b4f-90be-804e08e7b3ec"]
+}, Open  ]],
+Cell[12483, 296, 221, 5, 28, "Input",ExpressionUUID->"00337cc4-2741-c84d-a882-3d1e07a2e030"],
+Cell[CellGroupData[{
+Cell[12729, 305, 2487, 61, 143, "Input",ExpressionUUID->"569bffc5-d42c-b544-9b1e-72908e49c9f3"],
+Cell[15219, 368, 2978, 59, 350, "Output",ExpressionUUID->"d961e6a7-74ed-f34a-82ae-751dab4d71cf"]
+}, Open  ]],
+Cell[18212, 430, 219, 5, 28, "Input",ExpressionUUID->"ee167a03-4e29-7c49-99ef-1d8910f9605e"],
+Cell[CellGroupData[{
+Cell[18456, 439, 2481, 60, 181, "Input",ExpressionUUID->"2326e976-f637-3e4a-a4e7-e0d39cd16316"],
+Cell[20940, 501, 2981, 59, 368, "Output",ExpressionUUID->"1e9840be-f851-004e-a1ba-7b06948a1a2c"]
 }, Open  ]]
 }
 ]
